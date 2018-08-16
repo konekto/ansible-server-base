@@ -1,4 +1,4 @@
-base_ssh_key_path: false
+base_ssh_key_path: "false"
 
 # the project name should contain not empty space
 base_project_name: "project_name"

@@ -8,4 +8,4 @@
   with_items:
     - deployer
     - admin
-  when: base_ssh_key_path is not false
+  when: base_ssh_key_path != "false"
