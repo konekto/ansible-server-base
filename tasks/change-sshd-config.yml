@@ -1,0 +1,32 @@
+# A set of little config changes for harding the ssh service
+
+- name: Set sshd port to a non-standard port
+  lineinfile:
+    regexp: '^Port'
+    line: "Port 2222"
+    dest: /etc/ssh/sshd_config
+  notify:
+    - restart sshd
+
+- name: Disable ssh root login
+  lineinfile:
+    regexp: '^PermitRootLogin'
+    line: 'PermitRootLogin no'
+    dest: /etc/ssh/sshd_config
+  notify:
+    - restart sshd
+
+- name: Disable PasswordAuthentication
+  lineinfile:
+    regexp: '^PasswordAuthentication'
+    line: 'PasswordAuthentication no'
+    dest: /etc/ssh/sshd_config
+  notify:
+    - restart sshd
+
+- name: Sets AllowUsers to only konekto
+  lineinfile:
+    line: 'AllowUsers admin deployer'
+    dest: /etc/ssh/sshd_config
+  notify:
+    - restart sshd

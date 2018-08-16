@@ -1,0 +1,18 @@
+# this tasks will create new ssh key for the server. This key will be used
+# as deploy key for Gitlab or any other vcs service
+---
+- name: Create ssh key for deployer user
+  shell: ssh-keygen -b 2048 -t rsa -f /home/deployer/.ssh/id_rsa -q -N ""
+  args:
+    creates: /home/deployer/.ssh/id_rsa
+
+- file:
+    path: /home/deployer/.ssh/id_rsa
+    mode: 0644
+    state: file
+
+- fetch:
+    src: /home/deployer/.ssh/id_rsa.pub
+    dest: /tmp/deploykey
+    flat: yes
+

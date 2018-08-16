@@ -1,0 +1,9 @@
+# Add admin to sudoers file
+---
+- name: Gives admin user sudo rights
+  blockinfile:
+    path: "/etc/sudoers.d/admins"
+    create: yes
+    block: |
+      admin ALL=(ALL) ALL
+

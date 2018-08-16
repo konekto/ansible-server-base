@@ -1,0 +1,9 @@
+# Adds custom env variables to the /etc/environment file
+---
+- name: Add variables to /etc/environment
+  lineinfile:
+    regexp: "^{{item.env}}"
+    line: "{{item.env}}={{item.var}}"
+    path: "/etc/environment"
+  loop:
+    - {env: "PROJECT_NAME", var: "{{base_project_name}}"}

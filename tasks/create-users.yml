@@ -1,0 +1,36 @@
+- name: Create user admin and deployer
+  user:
+    name: "{{ item }}"
+    append: yes
+    shell: /bin/bash
+  with_items:
+    - admin
+    - deployer
+
+- name: Create user admin and deployer .ssh folder
+  file:
+    path: "/home/{{ item }}/.ssh"
+    state: directory
+  with_items:
+    - admin
+    - deployer
+
+- name: Create user admin and deployer authorized keys
+  copy:
+    content: ""
+    dest: "/home/{{ item }}/.ssh/authorized_keys"
+    group: "{{item}}"
+    owner: "{{item}}"
+    mode: 0644
+    force: no
+  with_items:
+    - admin
+    - deployer
+
+- name: Create root password
+  shell: "head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 > /home/admin/.root_password"
+  args:
+    creates: /home/admin/.root_password
+
+- name: Set new rootpassword
+  shell: echo "root:`cat /home/admin/.root_password`" | chpasswd

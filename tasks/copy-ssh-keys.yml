@@ -1,0 +1,11 @@
+---
+# Add the developers keys to admin and deployer
+- name: Adds ssh keys for authorized keys
+  authorized_key:
+    user: "{{item}}"
+    state: present
+    key: "{{ lookup('file', base_ssh_key_path)}}"
+  with_items:
+    - deployer
+    - admin
+  when: base_ssh_key_path is not false
