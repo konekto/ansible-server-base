@@ -25,13 +25,15 @@
     force: no
   loop: "{{users}}"
 
-- name: "Load root password in memory"
-  slurp:
-    src: /home/admin/.root_password
-  register: root_password_base64
+  ##Due to problems with the root password change logic comment this out.
 
-- set_fact:
-    root_password: "{{ root_password_base64['content'] | b64decode }}"
-
-- name: Set new password for root user
-  shell: "echo \"root:{{root_password}}\" | chpasswd"
+#- name: "Load root password in memory"
+#  slurp:
+#    src: /home/admin/.root_password
+#  register: root_password_base64
+#
+#- set_fact:
+#    root_password: "{{ root_password_base64['content'] | b64decode }}"
+#
+#- name: Set new password for root user
+#  shell: "echo \"root:{{root_password}}\" | chpasswd"
