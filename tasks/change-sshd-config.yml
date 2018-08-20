@@ -7,7 +7,7 @@
     dest: /etc/ssh/sshd_config
   notify:
     - restart sshd
-  when: is base_ssh_port_change
+  when: base_ssh_port_change is true
 
 
 - name: Disable ssh root login
