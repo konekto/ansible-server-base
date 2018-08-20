@@ -6,16 +6,14 @@
     name: "{{ item }}"
     append: yes
     shell: /bin/bash
-  loop:
-    - "{{users}}"
+  loop: "{{users}}"
 
 
 - name: Create user admin and deployer .ssh folder
   file:
     path: "/home/{{ item }}/.ssh"
     state: directory
-  loop:
-    - "{{users}}"
+  loop: "{{users}}"
 
 - name: Create user admin and deployer authorized keys
   copy:
@@ -25,8 +23,7 @@
     owner: "{{item}}"
     mode: 0644
     force: no
-  loop:
-  - "{{users}}"
+  loop: "{{users}}"
 
 - name: Create root password
   shell: "head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 > /home/admin/.root_password"
