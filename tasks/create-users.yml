@@ -25,10 +25,13 @@
     force: no
   loop: "{{users}}"
 
-- name: Create root password
-  shell: "head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 > /home/admin/.root_password"
-  args:
-    creates: /home/admin/.root_password
+- name: "Load root password in memory"
+  slurp:
+    src: /home/admin/.root_password
+  register: root_password_base64
 
-- name: Set new rootpassword
-  shell: echo "root:`cat /home/admin/.root_password`" | chpasswd
+- set_fact:
+    root_password: "{{ root_password_base64['content'] | b64decode }}"
+
+- name: Set new password for root user
+  shell: "echo \"root:{{root_password}}\" | chpasswd"
