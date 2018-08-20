@@ -25,15 +25,24 @@
     force: no
   loop: "{{users}}"
 
-  ##Due to problems with the root password change logic comment this out.
+- name: Create root password
+  shell: "head /dev/urandom | tr -dc A-Za-z0-9 | head -c 20"
+  args:
+    creates: /home/admin/.root_password
+  register: root_password
 
-#- name: "Load root password in memory"
-#  slurp:
-#    src: /home/admin/.root_password
-#  register: root_password_base64
-#
-#- set_fact:
-#    root_password: "{{ root_password_base64['content'] | b64decode }}"
-#
-#- name: Set new password for root user
-#  shell: "echo \"root:{{root_password}}\" | chpasswd"
+- command: "python -c 'import crypt; print(crypt.crypt(\"{{root_password.stdout}}\", crypt.mksalt(crypt.METHOD_SHA512)))'"
+  register: hashed_root_password
+  when: root_password.changed
+
+- lineinfile:
+    path: /home/admin/.root_password
+    line: "{{root_password}}"
+    create: yes
+  when: root_password.changed
+
+- name: Set new password for root user
+  user:
+    name: root
+    password: "{{hashed_root_password.stdout}}"
+  when: root_password.changed
