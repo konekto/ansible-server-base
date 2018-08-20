@@ -2,15 +2,17 @@
 
 - name: Set sshd port to a non-standard port
   lineinfile:
-    regexp: '^Port'
-    line: "Port 2222"
+    regexp: 'Port '
+    line: "Port {{ base_ssh_port }}"
     dest: /etc/ssh/sshd_config
   notify:
     - restart sshd
+  when: is base_ssh_port_change
+
 
 - name: Disable ssh root login
-  lineinfile:
-    regexp: '^PermitRootLogin'
+  lineinfile:s
+    regexp: 'PermitRootLogin '
     line: 'PermitRootLogin no'
     dest: /etc/ssh/sshd_config
   notify:
@@ -18,7 +20,7 @@
 
 - name: Disable PasswordAuthentication
   lineinfile:
-    regexp: '^PasswordAuthentication'
+    regexp: 'PasswordAuthentication '
     line: 'PasswordAuthentication no'
     dest: /etc/ssh/sshd_config
   notify:
