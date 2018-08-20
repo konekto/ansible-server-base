@@ -6,3 +6,5 @@ base_project_name: "project_name"
 
 base_ssh_port_change: "false"
 base_ssh_port: 134
+
+base_additional_users: []

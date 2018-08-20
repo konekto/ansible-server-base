@@ -1,0 +1,4 @@
+---
+base_default_users:
+  - admin
+  - deployer
