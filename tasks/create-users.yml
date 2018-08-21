@@ -33,7 +33,7 @@
 - name: "Correct permissions of ssh keys"
   file:
     path: "/home/{{ item }}/.ssh/id_rsa"
-    mode: 0644
+    mode: 0600
     owner: "{{ item }}"
     state: file
   loop: "{{users}}"
