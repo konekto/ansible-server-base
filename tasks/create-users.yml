@@ -36,5 +36,5 @@
     mode: 0644
     owner: "{{ item }}"
     state: file
-  loop: "{users}"
+  loop: "{{users}}"
 
