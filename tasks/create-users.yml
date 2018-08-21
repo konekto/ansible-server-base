@@ -8,7 +8,6 @@
     shell: /bin/bash
   loop: "{{users}}"
 
-
 - name: Create user admin and deployer .ssh folder
   file:
     path: "/home/{{ item }}/.ssh"
@@ -25,24 +24,17 @@
     force: no
   loop: "{{users}}"
 
-- name: Create root password
-  shell: "head /dev/urandom | tr -dc A-Za-z0-9 | head -c 20"
+- name: Create ssh key for all users
+  command: "ssh-keygen -b 2048 -t rsa -f /home/{{ item }}/.ssh/id_rsa -q -N \"\""
   args:
-    creates: /home/admin/.root_password
-  register: root_password
+    creates: "/home/{{ item }}/.ssh/id_rsa"
+  loop: "{{users}}"
 
-- command: "python -c 'import crypt; print(crypt.crypt(\"{{root_password.stdout}}\", crypt.mksalt(crypt.METHOD_SHA512)))'"
-  register: hashed_root_password
-  when: root_password.changed
+- name: "Correct permissions of ssh keys"
+  file:
+    path: "/home/{{ item }}/.ssh/id_rsa"
+    mode: 0644
+    owner: {{ item }}
+    state: file
+  loop: "{users}"
 
-- lineinfile:
-    path: /home/admin/.root_password
-    line: "{{root_password}}"
-    create: yes
-  when: root_password.changed
-
-- name: Set new password for root user
-  user:
-    name: root
-    password: "{{hashed_root_password.stdout}}"
-  when: root_password.changed

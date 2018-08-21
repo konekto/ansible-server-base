@@ -3,5 +3,6 @@
   - import_tasks: change-sshd-config.yml
   - import_tasks: create-users.yml
   - import_tasks: copy-ssh-keys.yml
-  - import_tasks: create-deployer-ssh-key.yml
   - import_tasks: configure-sudoers.yml
+  - import_tasks: set-root-password.yml
+
