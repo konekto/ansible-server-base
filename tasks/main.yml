@@ -1,4 +1,5 @@
 ---
+  - import_tasks: upgrade-centos.yml
   - import_tasks: install-additional-system-packages.yml
   - import_tasks: add-env-variables.yml
   - import_tasks: change-sshd-config.yml

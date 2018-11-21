@@ -1,0 +1,5 @@
+---
+  - name: "Ensure CentOS is up to date."
+    yum:
+      name: '*'
+      state: latest
