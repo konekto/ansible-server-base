@@ -1,4 +1,4 @@
-base_ssh_key_path: "false"
+base_ssh_keys_url: "false"
 
 # the project name should contain not empty space
 base_project_name: "project_name"
@@ -8,3 +8,8 @@ base_ssh_port_change: "false"
 base_ssh_port: 134
 
 base_additional_users: []
+
+base_additional_sys_packages:
+  - vim
+  - git
+  - unzip

@@ -4,8 +4,8 @@
   authorized_key:
     user: "{{item}}"
     state: present
-    key: "{{ lookup('file', base_ssh_key_path)}}"
-  with_items:
+    key: "{{ base_ssh_keys_url }}"
+  loop:
     - deployer
     - admin
-  when: base_ssh_key_path != "false"
+  when: base_ssh_keys_url != "false"
