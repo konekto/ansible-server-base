@@ -3,4 +3,4 @@
   yum:
     state: latest
     name: "{{item}}"
-    loop: "{{ base_additional_sys_packages }}"
+  loop: "{{ base_additional_sys_packages }}"
