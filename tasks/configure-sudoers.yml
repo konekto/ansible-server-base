@@ -3,7 +3,6 @@
 - name: Gives admin user sudo rights
   blockinfile:
     path: "/etc/sudoers.d/admins"
-    create: yes
+    create: true
     block: |
       admin ALL=(ALL) ALL
-

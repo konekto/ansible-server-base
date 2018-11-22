@@ -1,5 +1,5 @@
+---
 # A set of little config changes for harding the ssh service
-
 - name: Set sshd port to a non-standard port
   lineinfile:
     regexp: 'Port '
@@ -28,7 +28,7 @@
 
 - name: Sets AllowUsers to only konekto
   lineinfile:
-    line: 'AllowUsers admin deployer'
+    line: 'AllowUsers admin deployer vagrant'
     dest: /etc/ssh/sshd_config
   notify:
     - restart sshd

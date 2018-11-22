@@ -8,4 +8,5 @@
 out
 gen### Ansible template
 *.retry
+.venv
 

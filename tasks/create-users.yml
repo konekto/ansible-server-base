@@ -1,10 +1,11 @@
+---
 - set_fact:
     users: "{{ base_default_users + base_additional_users }}"
 
 - name: Create user admin and deployer
   user:
     name: "{{ item }}"
-    append: yes
+    append: true
     shell: /bin/bash
   loop: "{{users}}"
 
@@ -21,7 +22,7 @@
     group: "{{item}}"
     owner: "{{item}}"
     mode: 0644
-    force: no
+    force: false
   loop: "{{users}}"
 
 - name: Create ssh key for all users
@@ -37,4 +38,3 @@
     owner: "{{ item }}"
     state: file
   loop: "{{users}}"
-

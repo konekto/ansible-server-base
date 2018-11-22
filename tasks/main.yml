@@ -1,10 +1,12 @@
 ---
-  - import_tasks: upgrade-centos.yml
-  - import_tasks: install-additional-system-packages.yml
-  - import_tasks: add-env-variables.yml
-  - import_tasks: change-sshd-config.yml
-  - import_tasks: create-users.yml
-  - import_tasks: copy-ssh-keys.yml
-  - import_tasks: configure-sudoers.yml
-  - import_tasks: set-root-password.yml
-
+- import_tasks: upgrade-centos.yml
+- import_tasks: install-additional-system-packages.yml
+- import_tasks: install-python3.yml
+- import_tasks: add-env-variables.yml
+- import_tasks: change-sshd-config.yml
+- import_tasks: create-users.yml
+- import_tasks: copy-ssh-keys.yml
+- import_tasks: configure-sudoers.yml
+- import_tasks: set-root-password.yml
+  tags:
+    - root-password
