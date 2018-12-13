@@ -3,3 +3,8 @@
   yum:
     name: '*'
     state: latest
+
+- name: Ensure docker-py is installed.
+  yum:
+    name: python-docker-py
+
