@@ -1,0 +1,23 @@
+---
+
+- name: "Ensure that firewalld is installed."
+  yum:
+    name: firewalld
+    state: latest
+
+- name: "Adds https service to firewalld configuration"
+  firewalld:
+    service: "{{item}}"
+    permanent: true
+    state: enabled
+  loop:
+    - https
+    - http
+  notify:
+    - restart firewalld service
+
+- name: Ensure firewalld is running
+  service:
+    name: firewalld
+    state: started
+    enabled: true

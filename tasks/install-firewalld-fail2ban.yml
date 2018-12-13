@@ -1,0 +1,29 @@
+---
+- name: Ensure epel releases is installed
+  yum:
+    state: latest
+    name: epel-release
+
+- name: Ensure fail2ban firewalld is installed
+  yum:
+    state: latest
+    name: fail2ban-firewalld
+
+- name: Add sshd config to fail2ban.local
+  blockinfile:
+    path: "/etc/fail2ban/jail_ssh.local"
+    create: yes
+    block: |
+      [sshd]
+      enabled = true
+  notify:
+    - restart fail2ban service
+
+- name: Ensure fail2ban service started and enabled
+  service:
+    name: fail2ban
+    state: started
+    enabled: true
+
+
+

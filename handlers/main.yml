@@ -3,3 +3,18 @@
   service:
     name: sshd
     state: restarted
+
+- name: "restart fail2ban service"
+  service:
+    name: fail2ban
+    state: restarted
+
+- name: "restart firewalld service"
+  service:
+    name: firewalld
+    state: restarted
+
+- name: "restart docker engine service"
+  service:
+    name: docker
+    state: restarted
