@@ -2,6 +2,9 @@
 - import_tasks: upgrade-centos.yml
 - import_tasks: install-additional-system-packages.yml
 - import_tasks: install-python3.yml
+- import_tasks: network-config.yml
+- import_tasks: configure-firewalld.yml
+- import_tasks: install-firewalld-fail2ban.yml
 - import_tasks: add-env-variables.yml
 - import_tasks: change-sshd-config.yml
 - import_tasks: create-users.yml
