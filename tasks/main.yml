@@ -1,4 +1,10 @@
 ---
+
+- name: Check if required variable is set
+  fail:
+    msg: Please provide a value for the ssh keys url
+  when: base_ssh_keys_url == "false"
+
 - import_tasks: upgrade-centos.yml
 - import_tasks: install-additional-system-packages.yml
 - import_tasks: install-python3.yml

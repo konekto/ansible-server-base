@@ -4,3 +4,5 @@
   hosts: all
   roles:
     - role: ansible-server-base
+      vars:
+        base_ssh_keys_url: https://github.com/traedamatic.keys

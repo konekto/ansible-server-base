@@ -1,5 +1,4 @@
 import os
-from passlib.hash import sha512_crypt
 import testinfra.utils.ansible_runner
 
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(

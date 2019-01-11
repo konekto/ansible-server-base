@@ -11,7 +11,7 @@
 
 - name: Add sshd config to fail2ban.local
   blockinfile:
-    path: "/etc/fail2ban/jail_ssh.local"
+    path: "/etc/fail2ban/jail.local"
     create: yes
     block: |
       [sshd]
@@ -22,7 +22,7 @@
 - name: Ensure fail2ban service started and enabled
   service:
     name: fail2ban
-    state: started
+    state: restarted
     enabled: true
 
 
