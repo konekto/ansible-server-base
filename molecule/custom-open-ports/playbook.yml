@@ -1,10 +1,11 @@
 ---
 - name: Converge
-  become: true
   hosts: all
+  become: true
   roles:
     - role: ansible-server-base
       vars:
         base_ssh_keys_url: https://github.com/traedamatic.keys
-      tags:
-        - firewall
+        base_firewalld_open_ports:
+          - 8001/tcp
+
