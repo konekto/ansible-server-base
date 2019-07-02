@@ -5,16 +5,25 @@
     name: firewalld
     state: latest
 
-- name: "Adds https service to firewalld configuration"
+- name: "Ensure that defined services are open for incoming connections"
   firewalld:
     service: "{{item}}"
     permanent: true
     state: enabled
-  loop:
-    - https
-    - http
+  loop: "{{ base_firewalld_open_services }}"
   notify:
     - restart firewalld service
+  when: base_firewalld_open_services
+
+- name: "Ensure that defined ports are open for incoming connections"
+  firewalld:
+    port: "{{item}}"
+    permanent: true
+    state: enabled
+  loop: "{{ base_firewalld_open_ports }}"
+  notify:
+    - restart firewalld service
+  when: base_firewalld_open_ports
 
 - name: Ensure firewalld is running
   service:

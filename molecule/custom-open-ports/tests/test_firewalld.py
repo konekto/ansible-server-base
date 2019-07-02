@@ -29,20 +29,8 @@ def test_firewalld_configuration(host):
 
         publiczone = host.file('/etc/firewalld/zones/public.xml')
 
+        print(publiczone.content_string)
+
         assert publiczone.exists
 
-        assert '<service name="ssh"/>' in publiczone.content_string
-        assert '<service name="http"/>' in publiczone.content_string
-        assert '<service name="https"/>' in publiczone.content_string
-
-        assert '<port protocol="tcp" port="8001"/>' not in publiczone.content_string
-
-
-
-def test_fail2ban_running_and_enabled(host):
-
-    f = host.service('fail2ban')
-
-    assert f.is_running
-    assert f.is_enabled
-
+        assert '<port protocol="tcp" port="8001"/>' in publiczone.content_string
