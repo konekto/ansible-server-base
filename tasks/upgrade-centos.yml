@@ -4,7 +4,10 @@
     name: '*'
     state: latest
 
-- name: Ensure docker-py is installed.
+- name: Ensure additional python packages are installed.
   yum:
-    name: python-docker-py
+    name: "{{ item }}"
+  loop:
+    - python-docker-py
+    - python-pip
 
