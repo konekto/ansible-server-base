@@ -1,24 +1,17 @@
 ---
-- name: Ensure IUM release are installed.
-  yum:
-    name: https://centos7.iuscommunity.org/ius-release.rpm
-    state: latest
-
 - name: Ensure python3 and pip3 is installed.
   yum:
     name: "{{item}}"
     state: latest
   loop:
-    - python36u
-    - python36u-pip
-    - python36u-devel
-    - python-setuptools
+    - python3
+    - python3-pip
+    - python3-devel
 
 - name: Ensure pip,setuptools and virtualenv are uptodate
   pip:
     name: "{{item}}"
     state: latest
-    executable: pip3.6
   loop:
     - pip
     - setuptools

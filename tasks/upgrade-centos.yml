@@ -7,11 +7,3 @@
 - name: "Ensure epel-release are installed"
   yum:
     name: epel-release
-
-- name: Ensure additional python packages are installed.
-  yum:
-    name: "{{ item }}"
-  loop:
-    - python-docker-py
-    - python-pip
-
