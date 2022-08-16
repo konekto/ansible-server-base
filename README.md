@@ -10,7 +10,6 @@ See the ```defaults/main.yml``` for the variables
 ## Tasks
 
 * add-env-variables.yml - Adds variables to dthe /etc/environment
-* change-sshd-config.yml - Harding the sshd config
 * configure-sudoers.yml - Configure custom sudoers permissions
 * copy-ssh-keys.yml - Copy developer keys to the remote host
 * create-deployer-ssh-key.yml - Creates deploy key for an CI system
